@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплата заказа - Дом мороженого</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+            color: #333333;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+
+        header {
+            background: linear-gradient(90deg, #ffffff 0%, #f9f9f9 100%);
+            color: #333333;
+            padding: 25px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .logo span {
+            color: #ff6b95;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #333333;
+        }
+
+        .content {
+            padding: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .order-summary {
+            flex: 1;
+            min-width: 300px;
+            background-color: #f9f9f9;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e8e8e8;
+        }
+
+        .order-summary h2 {
+            color: #333333;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 12px;
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e8e8e8;
+            font-weight: 600;
+        }
+
+        .order-item div:first-child {
+            color: #555555;
+        }
+
+        .order-item div:last-child {
+            color: #333333;
+            font-weight: 700;
+        }
+
+        .total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.3rem;
+            color: #333333;
+            padding-top: 15px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .payment-form {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .payment-form h2 {
+            color: #333333;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 12px;
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: #333333;
+            font-size: 1rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #d0d0d0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background-color: #ffffff;
+            color: #333333;
+            font-weight: 600;
+        }
+
+        input::placeholder {
+            color: #999999;
+            font-weight: normal;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #ff6b95;
+            box-shadow: 0 0 0 3px rgba(255, 107, 149, 0.2);
+        }
+
+        .card-details {
+            display: flex;
+            gap: 15px;
+        }
+
+        .card-details .form-group {
+            flex: 1;
+        }
+
+        .btn {
+            background: linear-gradient(90deg, #ff6b95 0%, #ff8eab 100%);
+            color: #ffffff;
+            border: none;
+            padding: 16px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 107, 149, 0.3);
+            margin-top: 10px;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 149, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            z-index: 1000;
+            transition: all 0.4s;
+            max-width: 400px;
+            width: 90%;
+            border: 1px solid #e0e0e0;
+        }
+
+        .notification.active {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .notification h3 {
+            color: #333333;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .notification p {
+            margin-bottom: 25px;
+            color: #555555;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .notification .btn {
+            width: auto;
+            padding: 12px 30px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .ice-cream-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #ff6b95;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #666666;
+            font-size: 0.95rem;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+            font-weight: 600;
+        }
+
+        @media (max-width: 650px) {
+            .content {
+                flex-direction: column;
+            }
+
+            .card-details {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            header {
+                padding: 20px;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">Дом <span>мороженого</span> 🍦</div>
+            <h1>Оформление заказа</h1>
+        </header>
+
+        <div class="content">
+            <div class="order-summary">
+                <h2>Ваш заказ</h2>
+                <div class="order-item">
+                    <div>Пломбир ванильный</div>
+                    <div>250 руб.</div>
+                </div>
+                <div class="order-item">
+                    <div>Шоколадное мороженое</div>
+                    <div>280 руб.</div>
+                </div>
+                <div class="order-item">
+                    <div>Фруктовый лед (ассорти)</div>
+                    <div>200 руб.</div>
+                </div>
+                <div class="order-item">
+                    <div>Клубничный рожок</div>
+                    <div>180 руб.</div>
+                </div>
+                <div class="total">
+                    <div>Итого:</div>
+                    <div>910 руб.</div>
+                </div>
+            </div>
+
+            <div class="payment-form">
+                <h2>Данные для оплаты</h2>
+                <form id="paymentForm">
+                    <div class="form-group">
+                        <label for="cardNumber">Номер карты</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cardName">Имя владельца карты</label>
+                        <input type="text" id="cardName" placeholder="Иван" required>
+                    </div>
+
+                    <div class="card-details">
+                        <div class="form-group">
+                            <label for="expiryDate">Срок действия</label>
+                            <input type="text" id="expiryDate" placeholder="ММ/ГГ" maxlength="5" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cvv">CVV код</label>
+                            <input type="text" id="cvv" placeholder="123" maxlength="3" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn">Подтвердить заказ</button>
+                </form>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 Дом мороженого. Все права защищены.</p>
+        </footer>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="notification" id="notification">
+        <div class="ice-cream-icon">🍦</div>
+        <h3>Заказ подтвержден!</h3>
+        <p>Спасибо за ваш заказ! Ваше мороженое уже готовится и скоро будет у вас.</p>
+        <button class="btn" id="closeNotification">Понятно</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const paymentForm = document.getElementById('paymentForm');
+            const notification = document.getElementById('notification');
+            const overlay = document.getElementById('overlay');
+            const closeNotification = document.getElementById('closeNotification');
+            const cardNumber = document.getElementById('cardNumber');
+            const expiryDate = document.getElementById('expiryDate');
+            const cvv = document.getElementById('cvv');
+
+            // Форматирование номера карты
+            cardNumber.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                let formattedValue = '';
+
+                for (let i = 0; i < value.length; i++) {
+                    if (i > 0 && i % 4 === 0) {
+                        formattedValue += ' ';
+                    }
+                    formattedValue += value[i];
+                }
+
+                e.target.value = formattedValue;
+            });
+
+            // Форматирование срока действия карты
+            expiryDate.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+
+                if (value.length >= 2) {
+                    e.target.value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                } else {
+                    e.target.value = value;
+                }
+            });
+
+            // Ограничение ввода только цифр для CVV
+            cvv.addEventListener('input', function(e) {
+                e.target.value = e.target.value.replace(/\D/g, '');
+            });
+
+            // Обработка отправки формы
+            paymentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Проверка заполнения всех полей
+                if (!cardNumber.value || !document.getElementById('cardName').value ||
+                    !expiryDate.value || !cvv.value) {
+                    alert('Пожалуйста, заполните все поля формы.');
+                    return;
+                }
+
+                // Показать уведомление
+                notification.classList.add('active');
+                overlay.classList.add('active');
+            });
+
+            // Закрытие уведомления
+            closeNotification.addEventListener('click', function() {
+                notification.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+
+            // Закрытие уведомления при клике на оверлей
+            overlay.addEventListener('click', function() {
+                notification.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
