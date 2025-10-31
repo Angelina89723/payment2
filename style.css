@@ -1,0 +1,279 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+    color: #333333;
+    min-height: 100vh;
+    padding: 20px;
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+}
+
+header {
+    background: linear-gradient(90deg, #ffffff 0%, #f9f9f9 100%);
+    color: #333333;
+    padding: 25px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.logo {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.logo span {
+    color: #ff6b95;
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+    color: #333333;
+}
+
+.content {
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.order-summary {
+    flex: 1;
+    min-width: 300px;
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e8e8e8;
+}
+
+.order-summary h2 {
+    color: #333333;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 12px;
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e8e8e8;
+    font-weight: 600;
+}
+
+.order-item div:first-child {
+    color: #555555;
+}
+
+.order-item div:last-child {
+    color: #333333;
+    font-weight: 700;
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: #333333;
+    padding-top: 15px;
+    border-top: 2px solid #e0e0e0;
+}
+
+.payment-form {
+    flex: 1;
+    min-width: 300px;
+}
+
+.payment-form h2 {
+    color: #333333;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 12px;
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 700;
+    color: #333333;
+    font-size: 1rem;
+}
+
+input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #d0d0d0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s;
+    background-color: #ffffff;
+    color: #333333;
+    font-weight: 600;
+}
+
+input::placeholder {
+    color: #999999;
+    font-weight: normal;
+}
+
+input:focus {
+    outline: none;
+    border-color: #ff6b95;
+    box-shadow: 0 0 0 3px rgba(255, 107, 149, 0.2);
+}
+
+.card-details {
+    display: flex;
+    gap: 15px;
+}
+
+.card-details .form-group {
+    flex: 1;
+}
+
+.btn {
+    background: linear-gradient(90deg, #ff6b95 0%, #ff8eab 100%);
+    color: #ffffff;
+    border: none;
+    padding: 16px 30px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(255, 107, 149, 0.3);
+    margin-top: 10px;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 107, 149, 0.4);
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    z-index: 1000;
+    transition: all 0.4s;
+    max-width: 400px;
+    width: 90%;
+    border: 1px solid #e0e0e0;
+}
+
+.notification.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.notification h3 {
+    color: #333333;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.notification p {
+    margin-bottom: 25px;
+    color: #555555;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.notification .btn {
+    width: auto;
+    padding: 12px 30px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+}
+
+.overlay.active {
+    display: block;
+}
+
+.ice-cream-icon {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    color: #ff6b95;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #666666;
+    font-size: 0.95rem;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    font-weight: 600;
+}
+
+@media (max-width: 650px) {
+    .content {
+        flex-direction: column;
+    }
+
+    .card-details {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    header {
+        padding: 20px;
+    }
+
+    .logo {
+        font-size: 2rem;
+    }
+}

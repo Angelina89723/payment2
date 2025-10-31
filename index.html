@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплата заказа - Дом мороженого</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">Дом <span>мороженого</span> 🍦</div>
+            <h1>Оформление заказа</h1>
+        </header>
+
+        <div class="content">
+            <div class="order-summary">
+                <h2>Ваш заказ</h2>
+                <div class="order-item">
+                    <div>Пломбир ванильный</div>
+                    <div>250 руб.</div>
+                </div>
+                <div class="order-item">
+                    <div>Шоколадное мороженое</div>
+                    <div>280 руб.</div>
+                </div>
+                <div class="order-item">
+                    <div>Фруктовый лед (ассорти)</div>
+                    <div>200 руб.</div>
+                </div>
+                <div class="order-item">
+                    <div>Клубничный рожок</div>
+                    <div>180 руб.</div>
+                </div>
+                <div class="total">
+                    <div>Итого:</div>
+                    <div>910 руб.</div>
+                </div>
+            </div>
+
+            <div class="payment-form">
+                <h2>Данные для оплаты</h2>
+                <form id="paymentForm">
+                    <div class="form-group">
+                        <label for="cardNumber">Номер карты</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cardName">Имя владельца карты</label>
+                        <input type="text" id="cardName" placeholder="Иван" required>
+                    </div>
+
+                    <div class="card-details">
+                        <div class="form-group">
+                            <label for="expiryDate">Срок действия</label>
+                            <input type="text" id="expiryDate" placeholder="ММ/ГГ" maxlength="5" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cvv">CVV код</label>
+                            <input type="text" id="cvv" placeholder="123" maxlength="3" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn">Подтвердить заказ</button>
+                </form>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 Дом мороженого. Все права защищены.</p>
+        </footer>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="notification" id="notification">
+        <div class="ice-cream-icon">🍦</div>
+        <h3>Заказ подтвержден!</h3>
+        <p>Спасибо за ваш заказ! Ваше мороженое уже готовится и скоро будет у вас.</p>
+        <button class="btn" id="closeNotification">Понятно</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
